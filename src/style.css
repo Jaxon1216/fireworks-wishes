@@ -1,0 +1,223 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ============================================================
+   粒子画布
+   ============================================================ */
+
+#tsparticles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* ============================================================
+   浮动名字浮层（位于粒子之上，UI 按钮之下）
+   ============================================================ */
+
+#names-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.floating-name {
+  position: absolute;
+  font-weight: 800;
+  letter-spacing: 2px;
+  opacity: 0;
+  transform: scale(0.3);
+  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.floating-name.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.floating-name.fade-out {
+  opacity: 0;
+  transform: scale(1.15);
+  transition:
+    opacity var(--fade-duration, 1.2s) ease-in,
+    transform var(--fade-duration, 1.2s) ease-in;
+}
+
+/* ============================================================
+   UI 浮层（开始按钮 + 祝福语）
+   ============================================================ */
+
+#ui-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+#start-btn {
+  pointer-events: auto;
+  padding: 16px 48px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24, #f0932b);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  letter-spacing: 4px;
+  box-shadow: 0 0 30px rgba(255, 107, 107, 0.5), 0 0 60px rgba(238, 90, 36, 0.3);
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+#start-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 40px rgba(255, 107, 107, 0.7), 0 0 80px rgba(238, 90, 36, 0.5);
+}
+
+#start-btn.hidden {
+  display: none;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* ============================================================
+   底部祝福语文字
+   ============================================================ */
+
+#blessing-text {
+  pointer-events: none;
+  font-size: clamp(24px, 4vw, 48px);
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  text-shadow:
+    0 0 20px rgba(255, 200, 50, 0.8),
+    0 0 40px rgba(255, 150, 50, 0.6),
+    0 0 80px rgba(255, 100, 50, 0.4);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  line-height: 1.6;
+  padding: 20px;
+  position: absolute;
+  bottom: 8%;
+}
+
+#blessing-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#blessing-text.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+#blessing-text.fade-out {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* ============================================================
+   最终画面：名字网格 + 总祝福语
+   ============================================================ */
+
+#final-screen {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 18px 24px;
+  padding: 40px 10%;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+}
+
+.final-name {
+  display: inline-block;
+  font-size: clamp(22px, 3.5vw, 42px);
+  font-weight: 800;
+  letter-spacing: 2px;
+  opacity: 0;
+  transform: scale(0.3) translateY(30px);
+  animation: namePopIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  white-space: nowrap;
+  text-shadow:
+    0 0 10px currentColor,
+    0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes namePopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+#final-blessing {
+  width: 100%;
+  text-align: center;
+  margin-top: 36px;
+  font-size: clamp(26px, 4vw, 52px);
+  font-weight: 700;
+  color: #fff;
+  white-space: pre-line;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: blessingFadeIn 1.2s ease forwards;
+  text-shadow:
+    0 0 20px rgba(255, 200, 50, 0.8),
+    0 0 40px rgba(255, 150, 50, 0.6),
+    0 0 80px rgba(255, 100, 50, 0.4);
+}
+
+@keyframes blessingFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

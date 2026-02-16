@@ -1,0 +1,80 @@
+/*
+ * Theme: Golden Engrave (金色烫金)
+ * 效果：金色渐变文字 + 金属质感浮雕边 + 柔和金色光晕
+ *       仿烫金/金箔印刷的高端质感
+ *
+ * 使用方式：在 main.ts 中 import "./themes/golden-engrave.css"
+ */
+
+.floating-name {
+  font-weight: 900;
+  letter-spacing: 3px;
+  background: linear-gradient(
+    180deg,
+    #fceabb 0%,
+    #f8b500 25%,
+    #f0932b 50%,
+    #f8b500 75%,
+    #fceabb 100%
+  );
+  background-size: 100% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: golden-shimmer 3s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(248, 181, 0, 0.4));
+}
+
+/* 浮雕描边效果 */
+.floating-name::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.5px rgba(248, 181, 0, 0.3);
+  filter: blur(1px);
+  pointer-events: none;
+  font: inherit;
+  letter-spacing: inherit;
+  font-weight: inherit;
+}
+
+/* 底部倒影 */
+.floating-name::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(180deg, #f8b500 0%, transparent 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: scaleY(-0.3) translateY(-4px);
+  transform-origin: top center;
+  opacity: 0.15;
+  filter: blur(2px);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent 80%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent 80%);
+  pointer-events: none;
+  font: inherit;
+  letter-spacing: inherit;
+  font-weight: inherit;
+}
+
+@keyframes golden-shimmer {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 0% 100%; }
+}
+
+.floating-name.visible {
+  text-shadow: none; /* 金色主题使用 background-clip 代替 text-shadow */
+}
+
+.floating-name.fade-out {
+  text-shadow: none;
+}

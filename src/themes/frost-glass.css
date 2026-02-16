@@ -1,0 +1,86 @@
+/*
+ * Theme: Frost Glass (冰霜玻璃)
+ * 效果：半透明磨砂玻璃质感文字 + 冰蓝色边缘光 + 结霜微粒感
+ *       有一种冬天窗户上结霜写字的感觉
+ *
+ * 使用方式：在 main.ts 中 import "./themes/frost-glass.css"
+ */
+
+.floating-name {
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: rgba(220, 240, 255, 0.85) !important;
+  -webkit-text-stroke: 0.5px rgba(180, 220, 255, 0.6);
+  text-shadow:
+    0 0 10px rgba(150, 210, 255, 0.6),
+    0 0 30px rgba(100, 180, 255, 0.3),
+    0 0 60px rgba(80, 160, 255, 0.15),
+    inset 0 0 20px rgba(255, 255, 255, 0.05) !important;
+  filter: drop-shadow(0 0 6px rgba(140, 200, 255, 0.4));
+  animation: frost-sparkle 4s ease-in-out infinite;
+  backdrop-filter: blur(1px);
+}
+
+/* 冰霜光晕边缘 */
+.floating-name::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(150, 210, 255, 0.15);
+  filter: blur(6px);
+  pointer-events: none;
+  font: inherit;
+  letter-spacing: inherit;
+  font-weight: inherit;
+}
+
+/* 倒影：冰面反射 */
+.floating-name::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  text-align: center;
+  color: rgba(180, 220, 255, 0.5);
+  transform: scaleY(-0.25) translateY(-2px);
+  transform-origin: top center;
+  opacity: 0.12;
+  filter: blur(3px);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.35), transparent 85%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.35), transparent 85%);
+  pointer-events: none;
+  font: inherit;
+  letter-spacing: inherit;
+  font-weight: inherit;
+  -webkit-text-stroke: none;
+  text-shadow: none;
+}
+
+@keyframes frost-sparkle {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(140, 200, 255, 0.4)) brightness(1);
+  }
+  33% {
+    filter: drop-shadow(0 0 10px rgba(160, 220, 255, 0.6)) brightness(1.08);
+  }
+  66% {
+    filter: drop-shadow(0 0 4px rgba(120, 190, 255, 0.35)) brightness(0.97);
+  }
+}
+
+.floating-name.visible {
+  text-shadow:
+    0 0 10px rgba(150, 210, 255, 0.6),
+    0 0 30px rgba(100, 180, 255, 0.3),
+    0 0 60px rgba(80, 160, 255, 0.15) !important;
+}
+
+.floating-name.fade-out {
+  text-shadow:
+    0 0 5px rgba(150, 210, 255, 0.3) !important;
+}

@@ -1,0 +1,66 @@
+/*
+ * Theme: Neon Sign (霓虹灯)
+ * 效果：霓虹管发光文字 + 地面倒影 + 微微呼吸闪烁
+ *
+ * 使用方式：在 main.ts 中 import "./themes/neon.css"
+ */
+
+.floating-name {
+  font-weight: 700;
+  letter-spacing: 4px;
+  -webkit-text-stroke: 1px currentColor;
+  paint-order: stroke fill;
+  filter: brightness(1.1);
+  animation: neon-breathe 2.5s ease-in-out infinite alternate;
+}
+
+.floating-name::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  text-align: center;
+  transform: scaleY(-0.35) translateY(-2px);
+  transform-origin: top center;
+  opacity: 0.18;
+  filter: blur(4px);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent 90%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent 90%);
+  pointer-events: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  -webkit-text-stroke: inherit;
+}
+
+@keyframes neon-breathe {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 2px currentColor);
+    opacity: 0.9;
+  }
+  50% {
+    filter: brightness(1.3) drop-shadow(0 0 8px currentColor);
+    opacity: 1;
+  }
+  100% {
+    filter: brightness(1.05) drop-shadow(0 0 3px currentColor);
+    opacity: 0.92;
+  }
+}
+
+/* 名字出现时的霓虹发光效果 */
+.floating-name.visible {
+  text-shadow:
+    0 0 7px currentColor,
+    0 0 20px currentColor,
+    0 0 42px currentColor,
+    0 0 80px currentColor;
+}
+
+/* 淡出时保持霓虹质感 */
+.floating-name.fade-out {
+  text-shadow:
+    0 0 7px currentColor,
+    0 0 20px currentColor;
+}

@@ -1,0 +1,26 @@
+{
+  "name": "fireworks-wishes",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tsparticles/engine": "^3.9.1",
+    "@tsparticles/basic": "^3.9.1",
+    "@tsparticles/plugin-emitters": "^3.9.1",
+    "@tsparticles/plugin-emitters-shape-square": "^3.9.1",
+    "@tsparticles/plugin-canvas-mask": "^3.9.1",
+    "@tsparticles/effect-trail": "^3.9.1",
+    "@tsparticles/updater-destroy": "^3.9.1",
+    "@tsparticles/updater-life": "^3.9.1",
+    "@tsparticles/updater-rotate": "^3.9.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^6.3.0"
+  }
+}
