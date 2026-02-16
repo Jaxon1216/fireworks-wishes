@@ -2,6 +2,10 @@
 
 English | [中文](./README.md)
 
+<p align="center">
+  <img src="./assets/cover.png" alt="Fireworks Wishes Cover" width="100%" />
+</p>
+
 A ready-to-use **fireworks blessing animation page** for any occasion — New Year, birthdays, Christmas, holidays, and more. Open the page → click "Start" → stunning fireworks fill the sky → names appear one by one → finally all names line up with a blessing message.
 
 > Built with Vite + TypeScript + tsParticles. Pure frontend, no backend needed.

@@ -2,6 +2,10 @@
 
 [English](./README.en.md) | 中文
 
+<p align="center">
+  <img src="./assets/cover.png" alt="Fireworks Wishes Cover" width="100%" />
+</p>
+
 一个开箱即用的 **烟花祝福动画页面**，适用于各种场景——新年、生日、圣诞、跨年、节日庆祝等。打开页面 → 点击"开始" → 绚丽烟花满屏绽放 → 名字逐个浮现 → 最终所有名字排列在一起，配上你的祝福语。
 
 > 基于 Vite + TypeScript + tsParticles 构建，纯前端项目，无需后端。
